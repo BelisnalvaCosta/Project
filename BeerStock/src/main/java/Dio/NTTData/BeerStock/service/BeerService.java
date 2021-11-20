@@ -9,6 +9,7 @@ import Dio.NTTData.BeerStock.repository.BeerRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import javax.swing.text.html.Option;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -59,4 +60,13 @@ public class BeerService {
                 .orElseThrow(() -> new BeerNotFoundException(id));
     }
 
+    public BeerDTO increment(Long id, int quantityToIncrement) {
+        Optional<Beer> optBeer = beerRepository.findById(id);
+        if(optBeer.isPresent()) {
+            Beer beerToIncrementStock = optBeer.get();
+            beerToIncrementStock.setQuantity(beerToIncrementStock.getQuantity() + quantityToIncrement);
+            return beerMapper.toDTO(beerToIncrementStock);
+        }
+        throw new BeerNotFoundException(id);
+        }
 }

@@ -1,5 +1,6 @@
 package Dio.NTTData.BeerStock.dto;
 
+import Dio.NTTData.BeerStock.enums.BeerType;
 import lombok.Builder;
 
 @Builder
@@ -15,7 +16,7 @@ public class BeerDTOBuilder {
     private String brand = "Ambev";
 
     @Builder.Default
-    private Int max = 50;
+    private Integer max = 50;
 
     @Builder.Default
     private int quantity = 10;
@@ -23,7 +24,7 @@ public class BeerDTOBuilder {
     @Builder.Default
     private BeerType type = BeerType.LAGER;
 
-    public BeerDTO toBeerTDO() {
+    public BeerDTO toBeerDTO() {
         return new BeerDTO(id,
                 name,
                 brand,
@@ -31,5 +32,4 @@ public class BeerDTOBuilder {
                 quantity,
                 type);
     }
-
 }
